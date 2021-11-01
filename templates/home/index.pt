@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>FINANCIAL SUPPORTER</h1>
-<h1>HOME PAGE</h1>
-</body>
-</html>
+<div metal:use-macro="load: ../shared/_layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+        <div tal:define="master load: components/navbar.pt" metal:use-macro="master" />
+        <div class="container">
+            <h1>FINANCIAL SUPPORTER</h1>
+            <h1>HOME PAGE</h1>
+        </div>
+        <div tal:define="master load: components/footer.pt" metal:use-macro="master" />
+    </div>
+</div>
