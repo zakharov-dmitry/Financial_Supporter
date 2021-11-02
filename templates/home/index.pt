@@ -1,10 +1,40 @@
 <div metal:use-macro="load: ../shared/_layout.pt">
     <div metal:fill-slot="content" tal:omit-tag="True">
-        <div tal:define="master load: components/navbar.pt" metal:use-macro="master" />
+        <div metal:use-macro="load: ../components/navbar.pt"/>
         <div class="container">
-            <h1>FINANCIAL SUPPORTER</h1>
-            <h1>HOME PAGE</h1>
+            <h1 class="display-4 text-danger">FINANCIAL SUPPORTER</h1>
+            <p class="font-monospace">Positions owned by Dmitry Zakharov</p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Тitle</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Coupon</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
-        <div tal:define="master load: components/footer.pt" metal:use-macro="master" />
+        <div metal:use-macro="load: ../components/footer.pt"/>
     </div>
 </div>
