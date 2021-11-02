@@ -3,7 +3,7 @@
         <div metal:use-macro="load: ../components/navbar.pt"/>
         <div class="container">
             <h1 class="display-4 text-danger">FINANCIAL SUPPORTER</h1>
-            <p class="font-monospace">Positions owned by Dmitry Zakharov</p>
+            <p class="font-monospace">Positions owned by ${user}</p>
             <table class="table">
               <thead>
                 <tr>
