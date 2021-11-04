@@ -8,7 +8,7 @@ server {
 		gzip            on;
 		gzip_buffers    8 256k;
 
-		alias /apps/app_repo/ch08-deployment/static;
+		alias /apps/app_repo/static;
 		expires 365d;
 	}
 	location / {
