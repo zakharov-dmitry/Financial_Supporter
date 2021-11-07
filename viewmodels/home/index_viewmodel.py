@@ -9,4 +9,7 @@ class IndexViewModel(ViewModelBase):
     def __init__(self, request: Request):
         super().__init__(request)
         self.user: str = "DmitryZ"
-        self.investments: Optional[List] = all_investments_for_user()
+        self.investments: Optional[List] = None
+
+    async def load(self):
+        self.investments: Optional[List] = await all_investments_for_user()

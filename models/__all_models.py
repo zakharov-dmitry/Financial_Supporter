@@ -1,0 +1,1 @@
+from models.investment import Investment

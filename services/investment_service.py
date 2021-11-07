@@ -1,7 +1,25 @@
-def all_investments_for_user():
-    return [
-        {"title": "ПЮДМ БО-П2", "id": "RU000A1020K7", "amount": 1000, "coupon": 9.89},
-        {"title": "ЛК Дельта выпуск 1", "id": "RU000A103CD8", "amount": 800, "coupon": 56.89},
-        {"title": "ТФН выпуск 1", "id": "RU000A102QY6", "amount": 7889, "coupon": 24.02},
-        {"title": "NexTouch выпуск 1", "id": "RU000A103WZ9", "amount": 12, "coupon": 44.44}
-    ]
+from sqlalchemy.future import select
+
+from models import db_session
+from models.investment import Investment
+
+
+async def all_investments_for_user():
+    async with db_session.create_async_session() as session:
+        query = select(Investment).order_by(Investment.amount.desc())
+        result = await session.execute(query)
+        investments = result.scalars()
+        return investments
+
+
+async def add_investment(title: str, id: str, amount: int, coupon: float):
+    investment = Investment()
+    investment.title = title
+    investment.id = id
+    investment.amount = amount
+    investment.coupon = coupon
+    async with db_session.create_async_session() as session:
+        session.add(investment)
+        await session.commit()
+
+        return investment
