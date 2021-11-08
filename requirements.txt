@@ -1,4 +1,22 @@
+#api framework
 fastapi
+
+#ASGI server
 uvicorn
+
+#templating lib for python
 fastapi_chameleon
+
+#serving static
 aiofiles
+
+#orm
+sqlalchemy
+
+#async driver for DB
+asyncpg
+#sync driver for DB
+psycopg2
+
+#storing env
+python-dotenv
