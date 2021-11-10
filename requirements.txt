@@ -20,3 +20,6 @@ psycopg2
 
 #storing env
 python-dotenv
+
+#password handling
+passlib
