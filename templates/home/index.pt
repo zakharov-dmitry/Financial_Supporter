@@ -3,7 +3,7 @@
         <div metal:use-macro="load: ../components/navbar.pt"/>
         <div class="container">
             <h1 class="display-4 text-danger">FINANCIAL SUPPORTER</h1>
-            <p class="font-monospace">Positions owned by ${user}</p>
+            <p class="font-monospace">Positions owned by ${admin}</p>
             <table class="table">
               <thead>
                 <tr>
@@ -12,6 +12,7 @@
                   <th scope="col">ID</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Coupon</th>
+                  <th scope="col">User</th>
                 </tr>
               </thead>
               <tbody>
@@ -22,6 +23,7 @@
                       <td>${investment.id}</td>
                       <td>${investment.amount}</td>
                       <td>${investment.coupon}</td>
+                      <td>${investment.owner.name}</td>
                     </tr>
                 </div>
               </tbody>

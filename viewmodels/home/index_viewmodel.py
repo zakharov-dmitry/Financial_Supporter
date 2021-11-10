@@ -8,7 +8,7 @@ from viewmodels.shared.viewmodel import ViewModelBase
 class IndexViewModel(ViewModelBase):
     def __init__(self, request: Request):
         super().__init__(request)
-        self.user: str = "DmitryZ"
+        self.admin: str = "Dmitry_Zakharov"
         self.investments: Optional[List] = None
 
     async def load(self):
