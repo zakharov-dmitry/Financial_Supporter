@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 
 from models.db_session import global_init_db
 from views import home
+from views import account
 
 app = fastapi.FastAPI()
 
@@ -15,6 +16,7 @@ def configure_templates():
 
 def configure_routes():
     app.include_router(home.router)
+    app.include_router(account.router)
     app.mount("/static", StaticFiles(directory="static"), name="static")
 
 

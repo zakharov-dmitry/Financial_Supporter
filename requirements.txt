@@ -23,3 +23,6 @@ python-dotenv
 
 #password handling
 passlib
+
+#for form parsing
+python-multipart

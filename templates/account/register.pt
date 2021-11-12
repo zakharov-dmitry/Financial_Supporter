@@ -1,0 +1,25 @@
+<div metal:use-macro="load: ../shared/_layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+        <div metal:use-macro="load: ../components/navbar.pt"/>
+            <div class="container mt-4 w-25 h-25">
+                <form action="" method="POST" class="account-form">
+                  <div class="mb-3">
+                    <label class="form-label">Email address</label>
+                    <input name="email" type="email" placeholder=" Your email address" class="form-control" value="${email}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input name="name" type="text" placeholder=" Your name" class="form-control" value="${name}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input name="password" type="password" minlength="8" class="form-control" placeholder=" Password" value="${password}" required>
+                  </div>
+                  <div style="clear: both;"></div>
+                  <div class="text-danger font-weight-bolt" tal:condition="error">${ error }</div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        <div metal:use-macro="load: ../components/footer.pt"/>
+    </div>
+</div>
