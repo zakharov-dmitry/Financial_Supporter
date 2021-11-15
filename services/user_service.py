@@ -23,3 +23,12 @@ async def get_user_by_email(email) -> Optional[User]:
         query = select(User).filter(User.email == email)
         result = await session.execute(query)
         return result.scalar_one_or_none()
+
+
+async def authenticate_user(email: str, password: str) -> Optional[User]:
+    user = await get_user_by_email(email)
+    if not user:
+        return None
+    elif not verify_password(password, user.hashed_password):
+        return None
+    return user

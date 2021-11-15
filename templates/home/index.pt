@@ -16,15 +16,17 @@
                 </tr>
               </thead>
               <tbody>
-                <div tal:repeat="investment investments">
-                    <tr>
-                      <th scope="row">${repeat.investment.number}</th>
-                      <td>${investment.title}</td>
-                      <td>${investment.id}</td>
-                      <td>${investment.amount}</td>
-                      <td>${investment.coupon}</td>
-                      <td>${investment.owner.name}</td>
-                    </tr>
+                <div tal:condition="investments">
+                    <div tal:repeat="investment investments">
+                        <tr>
+                          <th scope="row">${repeat.investment.number}</th>
+                          <td>${investment.title}</td>
+                          <td>${investment.id}</td>
+                          <td>${investment.amount}</td>
+                          <td>${investment.coupon}</td>
+                          <td>${investment.owner.name}</td>
+                        </tr>
+                    </div>
                 </div>
               </tbody>
             </table>

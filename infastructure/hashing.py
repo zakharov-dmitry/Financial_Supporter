@@ -7,4 +7,4 @@ def hash_password(password: str):
 
 
 def verify_password(password: str, hashed_password: str):
-    return crypto.verify(password, hash_password())
+    return crypto.verify(password, hashed_password)

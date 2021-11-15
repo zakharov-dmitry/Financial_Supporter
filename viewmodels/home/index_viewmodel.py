@@ -13,3 +13,4 @@ class IndexViewModel(ViewModelBase):
 
     async def load(self):
         self.investments: Optional[List] = await all_investments_for_user()
+
