@@ -26,3 +26,6 @@ passlib
 
 #for form parsing
 python-multipart
+
+#for JWT tokens
+python-jose
