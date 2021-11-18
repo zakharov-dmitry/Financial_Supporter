@@ -1,12 +1,13 @@
 from datetime import timedelta, datetime
 from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, status, Response
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
+from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.security.utils import get_authorization_scheme_param
 from jose import JWTError, jwt
 
 from config import settings
 from infastructure.oauth2 import OAuth2PasswordBearerWithCookie
-from services.user_service import authenticate_user
+from services.user_service import authenticate_user, get_user_by_email
 
 oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="token")
 
@@ -40,3 +41,36 @@ async def login_for_access_token(response: Response, form_data: OAuth2PasswordRe
     response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True)
     # TODO: is the string needed???
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+def get_current_user_from_request(request: Request):
+    access_token = request.cookies.get("access_token")
+    scheme, param = get_authorization_scheme_param(access_token)
+    # scheme will hold "Bearer" and param will hold actual token value
+    try:
+        payload = jwt.decode(token=param, key=settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            return None
+    except JWTError:
+        return None
+    return username
+
+
+async def get_current_user_from_token(token: str = Depends(oauth2_scheme)):
+    credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Credentials invalid")
+    try:
+        payload = jwt.decode(token=token, key=settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+    user = await get_user_by_email(email=username)
+    if user is None:
+        raise credentials_exception
+    return user
+
+
+def logout_delete_token(response: Response):
+    response.delete_cookie("access_token")

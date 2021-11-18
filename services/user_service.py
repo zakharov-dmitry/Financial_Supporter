@@ -18,7 +18,7 @@ async def create_new_user(email: str, name: str, password: str) -> Optional[User
         return user
 
 
-async def get_user_by_email(email) -> Optional[User]:
+async def get_user_by_email(email: str) -> Optional[User]:
     async with db_session.create_async_session() as session:
         query = select(User).filter(User.email == email)
         result = await session.execute(query)

@@ -8,6 +8,7 @@ from infastructure.security import login_for_access_token
 from services import user_service
 from viewmodels.account.login_viewmodel import LoginViewModel
 from viewmodels.account.register_viewmodel import RegisterViewModel
+import infastructure
 
 router = APIRouter()
 
@@ -52,4 +53,11 @@ async def register(request: Request):
         return vm.to_dict()
     account = await user_service.create_new_user(vm.username, vm.name, vm.password)
     response = fastapi.responses.RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
+    return response
+
+
+@router.get("/account/logout")
+def logout():
+    response = fastapi.responses.RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
+    infastructure.security.logout_delete_token(response)
     return response

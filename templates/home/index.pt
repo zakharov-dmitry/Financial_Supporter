@@ -3,7 +3,9 @@
         <div metal:use-macro="load: ../components/navbar.pt"/>
         <div class="container">
             <h1 class="display-4 text-danger">FINANCIAL SUPPORTER</h1>
-            <p class="font-monospace">Positions owned by ${admin}</p>
+            <div tal:condition="current_user">
+                <p class="font-monospace">Positions owned by ${current_user}</p>
+            </div>
             <table class="table">
               <thead>
                 <tr>
