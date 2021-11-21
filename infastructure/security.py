@@ -7,6 +7,7 @@ from jose import JWTError, jwt
 
 from config import settings
 from infastructure.oauth2 import OAuth2PasswordBearerWithCookie
+from models.user import User
 from services.user_service import authenticate_user, get_user_by_email
 
 oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="token")
@@ -43,7 +44,7 @@ async def login_for_access_token(response: Response, form_data: OAuth2PasswordRe
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-def get_current_user_from_request(request: Request):
+def get_current_user_from_cookies(request: Request):
     access_token = request.cookies.get("access_token")
     scheme, param = get_authorization_scheme_param(access_token)
     # scheme will hold "Bearer" and param will hold actual token value
@@ -57,10 +58,13 @@ def get_current_user_from_request(request: Request):
     return username
 
 
-async def get_current_user_from_token(token: str = Depends(oauth2_scheme)):
+async def validate_current_user_from_token(request: Request) -> Optional[User]:
     credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Credentials invalid")
+    access_token = request.cookies.get("access_token")
+    scheme, param = get_authorization_scheme_param(access_token)
+    # scheme will hold "Bearer" and param will hold actual token value
     try:
-        payload = jwt.decode(token=token, key=settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        payload = jwt.decode(token=param, key=settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception

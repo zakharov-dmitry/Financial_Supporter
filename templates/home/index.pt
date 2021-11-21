@@ -5,6 +5,7 @@
             <h1 class="display-4 text-danger">FINANCIAL SUPPORTER</h1>
             <div tal:condition="current_user">
                 <p class="font-monospace">Positions owned by ${current_user}</p>
+                <a class="btn btn-secondary btn-lg" href="/investment/add" role="button">Add Investment</a>
             </div>
             <table class="table">
               <thead>

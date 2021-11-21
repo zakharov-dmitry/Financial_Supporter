@@ -15,7 +15,7 @@ async def all_investments_for_user():
         return investments
 
 
-async def add_investment(title: str, id: str, amount: int, coupon: float, owner_email: str):
+async def add_investment_for_user(title: str, id: str, amount: int, coupon: float, owner_email: str):
     investment = Investment()
     investment.title = title
     investment.id = id
@@ -27,3 +27,5 @@ async def add_investment(title: str, id: str, amount: int, coupon: float, owner_
         await session.commit()
 
         return investment
+
+
