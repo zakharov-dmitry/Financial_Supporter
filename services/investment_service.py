@@ -1,3 +1,5 @@
+import datetime
+
 from sqlalchemy.future import select
 import sqlalchemy.orm
 
@@ -15,12 +17,24 @@ async def all_investments_for_user():
         return investments
 
 
-async def add_investment_for_user(title: str, id: str, amount: int, coupon: float, owner_email: str):
+async def add_investment_for_user(
+        title: str,
+        code: str,
+        amount: int,
+        purchase_date: datetime.date,
+        purchase_prise: int, closing_date:
+        datetime.date,
+        owner_email: str,
+        value: int = None
+        ):
     investment = Investment()
     investment.title = title
-    investment.id = id
+    investment.code = code
     investment.amount = amount
-    investment.coupon = coupon
+    investment.value = value
+    investment.purchase_date = purchase_date
+    investment.purchase_prise = purchase_prise
+    investment.closing_date = closing_date
     investment.owner_email = owner_email
     async with db_session.create_async_session() as session:
         session.add(investment)

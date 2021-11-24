@@ -12,10 +12,11 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Тitle</th>
-                  <th scope="col">ID</th>
+                  <th scope="col">Code</th>
                   <th scope="col">Amount</th>
-                  <th scope="col">Coupon</th>
-                  <th scope="col">User</th>
+                  <th scope="col">Purchase Date</th>
+                  <th scope="col">Purchase Prise</th>
+                  <th scope="col">Closing Date</th>
                 </tr>
               </thead>
               <tbody>
@@ -24,10 +25,11 @@
                         <tr>
                           <th scope="row">${repeat.investment.number}</th>
                           <td>${investment.title}</td>
-                          <td>${investment.id}</td>
+                          <td>${investment.code}</td>
                           <td>${investment.amount}</td>
-                          <td>${investment.coupon}</td>
-                          <td>${investment.owner.name}</td>
+                          <td>${investment.purchase_date}</td>
+                          <td>${investment.purchase_prise}</td>
+                          <td>${investment.closing_date}</td>
                         </tr>
                     </div>
                 </div>

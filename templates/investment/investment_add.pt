@@ -1,0 +1,42 @@
+<div metal:use-macro="load: ../shared/_layout.pt">
+    <div metal:fill-slot="content" tal:omit-tag="True">
+        <div metal:use-macro="load: ../components/navbar.pt"/>
+            <div class="container mt-4 w-25 h-25">
+                <h1 class="display-4 text-danger">INVESTMENT</h1>
+                <form action="" method="POST" class="account-form">
+                  <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input name="title" type="text" placeholder="" class="form-control" value="${title}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Code</label>
+                    <input name="code" type="text" placeholder="" class="form-control" value="${code}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Amount</label>
+                    <input name="amount" type="number" placeholder="" class="form-control" value="${amount}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Value</label>
+                    <input name="value" type="number" placeholder="" class="form-control" value="${value}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Purchase Date</label>
+                    <input name="purchase_date" type="date" placeholder="" class="form-control" value="${purchase_date}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Purchase Prise</label>
+                    <input name="purchase_prise" type="number" placeholder="" class="form-control" value="${purchase_prise}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Closing Date</label>
+                    <input name="closing_date" type="date" placeholder="" class="form-control" value="${closing_date}" required>
+                  </div>
+                  <div style="clear: both;"></div>
+                  <div class="text-danger font-weight-bolt" tal:condition="error">${ error }</div>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        <div metal:use-macro="load: ../components/footer.pt"/>
+    </div>
+</div>
