@@ -15,6 +15,7 @@ class Investment(SqlAlchemyBase):
     value: int = sa.Column(sa.Integer, default=1000)
     amount: int = sa.Column(sa.Integer, nullable=False)
     purchase_date: datetime.date = sa.Column(sa.Date, nullable=False)
+    avg_prise: float = sa.Column(sa.Float, nullable=False)
     purchase_prise: int = sa.Column(sa.Integer, nullable=False)
     closing_date: datetime.date = sa.Column(sa.Date, nullable=False)
     owner_email: str = sa.Column(sa.String, ForeignKey('users.email'))

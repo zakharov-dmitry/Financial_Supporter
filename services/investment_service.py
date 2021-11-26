@@ -22,8 +22,9 @@ async def add_investment_for_user(
         code: str,
         amount: int,
         purchase_date: datetime.date,
-        purchase_prise: int, closing_date:
-        datetime.date,
+        avg_prise: float,
+        purchase_prise: int,
+        closing_date: datetime.date,
         owner_email: str,
         value: int = None
         ):
@@ -33,6 +34,7 @@ async def add_investment_for_user(
     investment.amount = amount
     investment.value = value
     investment.purchase_date = purchase_date
+    investment.avg_prise = avg_prise
     investment.purchase_prise = purchase_prise
     investment.closing_date = closing_date
     investment.owner_email = owner_email

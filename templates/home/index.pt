@@ -15,6 +15,7 @@
                   <th scope="col">Code</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Purchase Date</th>
+                  <th scope="col">Average Prise</th>
                   <th scope="col">Purchase Prise</th>
                   <th scope="col">Closing Date</th>
                 </tr>
@@ -28,6 +29,7 @@
                           <td>${investment.code}</td>
                           <td>${investment.amount}</td>
                           <td>${investment.purchase_date}</td>
+                          <td>${investment.avg_prise}</td>
                           <td>${investment.purchase_prise}</td>
                           <td>${investment.closing_date}</td>
                         </tr>

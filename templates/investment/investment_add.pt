@@ -25,6 +25,10 @@
                     <input name="purchase_date" type="date" placeholder="" class="form-control" value="${purchase_date}" required>
                   </div>
                   <div class="mb-3">
+                    <label class="form-label">Average Prise</label>
+                    <input name="avg_prise" type="number" placeholder="" class="form-control" value="${avg_prise}">
+                  </div>
+                  <div class="mb-3">
                     <label class="form-label">Purchase Prise</label>
                     <input name="purchase_prise" type="number" placeholder="" class="form-control" value="${purchase_prise}">
                   </div>

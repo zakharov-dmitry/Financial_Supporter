@@ -2,7 +2,7 @@ from datetime import datetime
 
 from fastapi import Request, HTTPException
 
-from infastructure.num_convert import try_int
+from infastructure.num_convert import try_int, try_float
 from infastructure.security import validate_current_user_from_token
 from models.user import User
 from viewmodels.shared.viewmodel import ViewModelBase
@@ -16,9 +16,10 @@ class InvestmentViewModel(ViewModelBase):
         self.amount: int = None
         self.value: int = None
         self.owner: User = None
-        self.purchase_date = None
-        self.purchase_prise = None
-        self.closing_date = None
+        self.purchase_date: datetime.date = None
+        self.avg_prise: float = None
+        self.purchase_prise: int = None
+        self.closing_date: datetime.date = None
 
     async def load(self):
         form = await self.request.form()
@@ -27,6 +28,7 @@ class InvestmentViewModel(ViewModelBase):
         self.amount = try_int(form.get('amount'))
         self.value = try_int(form.get('value'))
         self.purchase_date = datetime.strptime(form.get('purchase_date'), "%Y-%m-%d")
+        self.avg_prise = try_float(form.get('avg_prise'))
         self.purchase_prise = try_int(form.get('purchase_prise'))
         self.closing_date = datetime.strptime(form.get('closing_date'), "%Y-%m-%d")
         if not self.title:
