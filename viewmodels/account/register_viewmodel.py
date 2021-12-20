@@ -1,4 +1,4 @@
-from services import user_service
+import user_service
 from viewmodels.shared.viewmodel import ViewModelBase
 from fastapi import Request
 

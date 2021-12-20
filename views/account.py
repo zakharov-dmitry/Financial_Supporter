@@ -5,7 +5,7 @@ from fastapi import APIRouter, Request, status, HTTPException
 from fastapi_chameleon import template
 
 from infastructure.security import login_for_access_token
-from services import user_service
+import user_service
 from viewmodels.account.login_viewmodel import LoginViewModel
 from viewmodels.account.register_viewmodel import RegisterViewModel
 import infastructure

@@ -3,7 +3,8 @@ from fastapi import APIRouter, Request, status
 from fastapi_chameleon import template
 from sqlalchemy.exc import IntegrityError
 
-from services import investment_service
+
+import investment_service
 from viewmodels.investment.investment_viewmodel import InvestmentViewModel
 
 router = APIRouter()

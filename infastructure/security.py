@@ -8,7 +8,8 @@ from jose import JWTError, jwt
 from config import settings
 from infastructure.oauth2 import OAuth2PasswordBearerWithCookie
 from models.user import User
-from services.user_service import authenticate_user, get_user_by_email
+# from services.user_service import authenticate_user, get_user_by_email
+from user_service import get_user_by_email, authenticate_user
 
 oauth2_scheme = OAuth2PasswordBearerWithCookie(tokenUrl="token")
 

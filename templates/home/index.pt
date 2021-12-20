@@ -1,4 +1,5 @@
 <div metal:use-macro="load: ../shared/_layout.pt">
+
     <div metal:fill-slot="content" tal:omit-tag="True">
         <div metal:use-macro="load: ../components/navbar.pt"/>
         <div class="container">
@@ -7,37 +8,94 @@
                 <p class="font-monospace">Positions owned by ${current_user}</p>
                 <a class="btn btn-secondary btn-lg" href="/investment/add" role="button">Add Investment</a>
             </div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Тitle</th>
-                  <th scope="col">Code</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Purchase Date</th>
-                  <th scope="col">Average Prise</th>
-                  <th scope="col">Purchase Prise</th>
-                  <th scope="col">Closing Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <div tal:condition="investments">
-                    <div tal:repeat="investment investments">
-                        <tr>
-                          <th scope="row">${repeat.investment.number}</th>
-                          <td>${investment.title}</td>
-                          <td>${investment.code}</td>
-                          <td>${investment.amount}</td>
-                          <td>${investment.purchase_date}</td>
-                          <td>${investment.avg_prise}</td>
-                          <td>${investment.purchase_prise}</td>
-                          <td>${investment.closing_date}</td>
-                        </tr>
-                    </div>
-                </div>
-              </tbody>
-            </table>
         </div>
-        <div metal:use-macro="load: ../components/footer.pt"/>
+
+        <div class="container mt-2">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+              <div tal:condition="positions">
+                <div tal:repeat="position positions">
+                  <div class="accordion-item" >
+                    <h2 class="accordion-header" id="flush-headingOne">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Title</th>
+                              <th scope="col">Code</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col">Avg. Prise</th>
+                              <th scope="col">Curr. Prise</th>
+                              <th scope="col">Curr. Inc.</th>
+                              <th scope="col">Curr. %</th>
+                              <th scope="col">Clos. Inc.</th>
+                              <th scope="col">Clos. %</th>
+                              <th scope="col">Clos. Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">${repeat.position.number}</th>
+                              <td class="text-start">${position.title}</td>
+                              <td class="text-start">${position.code}</td>
+                              <td class="text-center">${position.amount}</td>
+                              <td class="text-center">${position.avg_prise}</td>
+                              <td class="text-center">${position.current_prise}</td>
+                              <td class="text-center">${position.current_income}</td>
+                              <td class="text-center">${position.current_interest}</td>
+                              <td class="text-center">${position.closing_income}</td>
+                              <td class="text-center">${position.closing_interest}</td>
+                              <td class="text-center">${position.closing_date}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col">Purch. Date</th>
+                              <th scope="col">Avg. Prise</th>
+                              <th scope="col">Purch. Prise</th>
+                              <th scope="col">Hold. Years</th>
+                              <th scope="col">Current Inc.</th>
+                              <th scope="col">Current %</th>
+                              <th scope="col">Closing Inc.</th>
+                              <th scope="col">Closing %</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <div tal:condition="position.investments">
+                              <div tal:repeat="investment position.investments">
+                                <tr>
+                                  <th scope="row">${repeat.investment.number}</th>
+                                  <td class="text-end">${investment.i.amount}</td>
+                                  <td class="text-center">${investment.i.purchase_date}</td>
+                                  <td class="text-end">${investment.i.avg_prise}</td>
+                                  <td class="text-end">${investment.i.purchase_prise}</td>
+                                  <td class="text-center">${investment.hold_year}</td>
+                                  <td class="text-end">${investment.curr_totl_incm}</td>
+                                  <td class="text-end">${investment.curr_annl_intr}</td>
+                                  <td class="text-end">${investment.clos_totl_incm}</td>
+                                  <td class="text-end">${investment.clos_annl_intr}</td>
+                                </tr>
+                                </div>
+                            </div>
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
     </div>
+
 </div>
