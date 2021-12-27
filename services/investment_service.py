@@ -44,9 +44,3 @@ async def add_investment_for_user(
 
         return investment
 
-
-def get_prise_for_investment(code: str):
-    data = {"RU000A100D89": 92.06,
-            "RU000A100YP2": 99.27,
-            "RU000A100Q35": 100.1}
-    return data[code]

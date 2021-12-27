@@ -32,3 +32,4 @@ python-jose
 
 #for ext apis
 requests
+aiohttp

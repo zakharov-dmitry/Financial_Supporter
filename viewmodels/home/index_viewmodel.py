@@ -4,7 +4,7 @@ from fastapi import Request
 
 from models.investment import Investment
 from investment_service import all_investments_for_user
-from moex import get_coupons_for_investment, get_prise_for_investment
+from moex import get_prise_for_investment_async, get_coupons_for_investment_async
 from viewmodels.shared.viewmodel import ViewModelBase
 
 
@@ -18,7 +18,7 @@ class IndexViewModel(ViewModelBase):
         investments_from_db = await all_investments_for_user()
         # casting Investment from DB to another extended class InvestmentWithCalculations
         investments_with_calculation = [InvestmentWithCalculations(i) for i in investments_from_db]
-        [i.calculate_values() for i in investments_with_calculation]
+        [await i.calculate_values() for i in investments_with_calculation]
         combined_investments = combine_investments(investments_with_calculation)
         self.positions = [Position(*item) for item in combined_investments.items()]
         [position.formatting_values() for position in self.positions]
@@ -37,10 +37,10 @@ class InvestmentWithCalculations:
         self.clos_annl_intr: float = None
         self.hold_year: float = None
 
-    def calculate_values(self):
+    async def calculate_values(self):
         # get all coupons for investment as dict date:money
-        all_coupons = get_coupons_for_investment(self.i.code)
-        self.curr_pris = get_prise_for_investment(self.i.code)
+        all_coupons = await get_coupons_for_investment_async(self.i.code)
+        self.curr_pris = await get_prise_for_investment_async(self.i.code)
 
         # check if the coupon can be paid in the future, coupon date after the purchase date
         def _coupon_can_be_paid(coupon):
