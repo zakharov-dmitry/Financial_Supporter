@@ -5,6 +5,7 @@ from fastapi import Request, HTTPException
 from infastructure.num_convert import try_int, try_float
 from infastructure.security import validate_current_user_from_token
 from models.user import User
+from moex import get_ext_investment_data_async
 from viewmodels.shared.viewmodel import ViewModelBase
 
 
@@ -23,14 +24,15 @@ class InvestmentViewModel(ViewModelBase):
 
     async def load(self):
         form = await self.request.form()
-        self.title = form.get('title')
+        external_data = await get_ext_investment_data_async(form.get('code'))
+        self.title = external_data['title']
         self.code = form.get('code')
         self.amount = try_int(form.get('amount'))
-        self.value = try_int(form.get('value'))
+        self.value = try_int(external_data['value'])
         self.purchase_date = datetime.strptime(form.get('purchase_date'), "%Y-%m-%d")
         self.avg_prise = try_float(form.get('avg_prise'))
         self.purchase_prise = try_int(form.get('purchase_prise'))
-        self.closing_date = datetime.strptime(form.get('closing_date'), "%Y-%m-%d")
+        self.closing_date = datetime.strptime(external_data['closing_date'], "%Y-%m-%d")
         if not self.title:
             self.error = "Title is missing"
         elif not self.code:

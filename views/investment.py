@@ -32,6 +32,7 @@ async def add_investment(request: Request):
             value=vm.value,
             owner_email=vm.owner.email,
             purchase_date=vm.purchase_date,
+            avg_prise=vm.avg_prise,
             purchase_prise=vm.purchase_prise,
             closing_date=vm.closing_date
         )

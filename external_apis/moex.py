@@ -49,3 +49,19 @@ async def get_prise_for_investment_async(code: str):
 
     return price
 
+
+async def get_ext_investment_data_async(code: str):
+    url = f'https://iss.moex.com/iss/engines/stock/markets/bonds/securities/{code}.json?iss.meta=off'
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            data = await response.json()
+            # getting indexes for needed columns
+            title_index = data['securities']['columns'].index('SECNAME')
+            value_index = data['securities']['columns'].index('FACEVALUE')
+            closing_date_index = data['securities']['columns'].index('MATDATE')
+            # [0] because the list with data is inside of another list
+            external_data = {'title': data['securities']['data'][0][title_index],
+                             'value': data['securities']['data'][0][value_index],
+                             'closing_date': data['securities']['data'][0][closing_date_index]}
+    return external_data
+
