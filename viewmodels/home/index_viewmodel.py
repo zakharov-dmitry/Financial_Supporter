@@ -3,7 +3,8 @@ from typing import List, Optional
 from fastapi import Request
 
 from models.investment import Investment
-from investment_service import all_investments_for_user, get_coupons_for_investment, get_prise_for_investment
+from investment_service import all_investments_for_user
+from moex import get_coupons_for_investment, get_prise_for_investment
 from viewmodels.shared.viewmodel import ViewModelBase
 
 

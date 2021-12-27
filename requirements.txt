@@ -29,3 +29,6 @@ python-multipart
 
 #for JWT tokens
 python-jose
+
+#for ext apis
+requests
