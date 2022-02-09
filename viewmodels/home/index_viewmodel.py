@@ -30,6 +30,7 @@ class InvestmentWithCalculations:
         self.paid_coup: dict = None
         self.curr_pris: float = None
         self.curr_totl_incm: float = None
+        self.accr_coup_incm: float = None
         self.curr_intr: float = None
         self.curr_annl_intr: float = None
         self.clos_totl_incm: float = None
@@ -40,7 +41,10 @@ class InvestmentWithCalculations:
     async def calculate_values(self):
         # get all coupons for investment as dict date:money
         all_coupons = await get_coupons_for_investment_async(self.i.code)
-        self.curr_pris = await get_prise_for_investment_async(self.i.code)
+        # get current prise and accrued coupon income for today
+        current_data_for_investment = await get_prise_for_investment_async(self.i.code)
+        self.curr_pris = current_data_for_investment['price']
+        self.accr_coup_incm = current_data_for_investment['accrued_coupon_income']
 
         # check if the coupon can be paid in the future, coupon date after the purchase date
         def _coupon_can_be_paid(coupon):
@@ -65,7 +69,7 @@ class InvestmentWithCalculations:
 
         # earned money for current investment till now
         self.curr_totl_incm = self.i.amount * (
-                income_coupons + self.i.value * self.curr_pris / 100) - self.i.purchase_prise
+                income_coupons + self.accr_coup_incm + self.i.value * self.curr_pris / 100) - self.i.purchase_prise
         # % earned for current investment till now
         self.curr_intr = self.curr_totl_incm / self.i.purchase_prise
 
